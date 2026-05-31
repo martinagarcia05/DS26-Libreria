@@ -1,4 +1,4 @@
-import Libros from '../components/LibrosCatalogo';
+import Libros from './LibrosCatalogo';
 import '../assets/styles/Home.css';
 
 function Home() {

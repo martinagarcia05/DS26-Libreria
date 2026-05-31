@@ -1,4 +1,4 @@
-import LibroCard from './LibroCard';
+import LibroCard from '../components/LibroCard';
 import type LibroCardProps from '../types/libroCardProps';
 import '../assets/styles/LibrosDestacados.css';
 import imgPrincipito from '../assets/principito.jpg';

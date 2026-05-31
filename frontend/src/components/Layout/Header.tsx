@@ -1,5 +1,5 @@
+import { NavLink } from 'react-router-dom';
 import '../../assets/styles/Header.css';
-//BOOTSTRAP NAV + CONTAINER
 
 function Header() {
   return (
@@ -10,9 +10,9 @@ function Header() {
           <h1>Librería UTN</h1>
         </div>
         <nav>
-          <a href="#" className="nav-link">Inicio</a>
-          <a href="#" className="nav-link">Catálogo</a>
-          <a href="#" className="nav-link">Nosotros</a>
+          <NavLink to="/" className="nav-link">Inicio</NavLink>
+          <NavLink to="/catalogo" className="nav-link">Catálogo</NavLink>
+          <NavLink to="/contacto" className="nav-link">Nosotros</NavLink>
           <button className="btn-login">Ingresar</button>
         </nav>
       </div>
