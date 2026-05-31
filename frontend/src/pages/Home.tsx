@@ -1,5 +1,5 @@
-import Libros from './LibrosCatalogo';
-import '../styles/Home.css';
+import Libros from '../components/LibrosCatalogo';
+import '../assets/styles/Home.css';
 
 function Home() {
   return (

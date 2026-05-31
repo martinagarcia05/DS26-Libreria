@@ -1,16 +1,8 @@
-import '../styles/LibroCard.css';
+import '../assets/styles/LibroCard.css';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
-export interface LibroCardProps {
-  id: number;
-  titulo: string;
-  autor: string;
-  precio: number;
-  imagen: string;
-  disponible: boolean;
-}
+import type LibroCardProps from '../types/libroCardProps';
 
 function LibroCard({ titulo, autor, precio, imagen, disponible }: LibroCardProps) {
   const [disponibilidad, setDisponibilidad] = useState<boolean>(disponible);

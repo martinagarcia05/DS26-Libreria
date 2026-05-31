@@ -1,6 +1,6 @@
 import LibroCard from './LibroCard';
-import type { LibroCardProps } from './LibroCard';
-import '../styles/LibrosDestacados.css';
+import type LibroCardProps from '../types/libroCardProps';
+import '../assets/styles/LibrosDestacados.css';
 import imgPrincipito from '../assets/principito.jpg';
 import imgFarenheit from '../assets/farenheit.jpg';
 import imgPatrones from '../assets/patronesDeDisenio.png';

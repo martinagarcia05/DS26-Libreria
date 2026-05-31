@@ -1,4 +1,4 @@
-import '../../styles/Footer.css';
+import '../../assets/styles/Footer.css';
 
 function Footer() {
   const anio = new Date().getFullYear();

@@ -1,4 +1,5 @@
-import '../../styles/Header.css';
+import '../../assets/styles/Header.css';
+//BOOTSTRAP NAV + CONTAINER
 
 function Header() {
   return (
