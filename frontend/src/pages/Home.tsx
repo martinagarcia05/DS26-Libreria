@@ -1,4 +1,3 @@
-import Libros from './LibrosCatalogo';
 import '../assets/styles/Home.css';
 
 function Home() {
@@ -11,7 +10,7 @@ function Home() {
         </div>
       </section>
 
-      <Libros />
+      
     </div>
   );
 }

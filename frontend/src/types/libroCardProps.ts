@@ -1,4 +1,4 @@
-export default interface LibroCardProps {
+export interface LibroCardProps {
   id: number;
   titulo: string;
   autor: string;

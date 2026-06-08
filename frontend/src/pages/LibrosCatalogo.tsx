@@ -1,47 +1,17 @@
 import LibroCard from '../components/LibroCard';
-import type LibroCardProps from '../types/libroCardProps';
+import type { LibroCardProps } from '../types/libroCardProps';
 import '../assets/styles/LibrosDestacados.css';
-import imgPrincipito from '../assets/principito.jpg';
-import imgFarenheit from '../assets/farenheit.jpg';
-import imgPatrones from '../assets/patronesDeDisenio.png';
 
+ interface LibrosProps {
+   libros: LibroCardProps[];
+ }
 
-const libros: LibroCardProps[] = [
-  {
-    id: 1,
-    titulo: 'El principito',
-    autor: 'Antoine de Saint-Exupéry',
-    precio: 4500,
-    imagen: imgPrincipito,
-    disponible: true
-  },
-  {
-    id: 2,
-    titulo: 'Patrones de diseño',
-    autor: 'Alexander Shvets',
-    precio: 8500,
-    imagen: imgPatrones,
-    disponible: true
-  },
-  {
-    id: 3,
-    titulo: 'Farenheit 451',
-    autor: 'Ray Bradbury',
-    precio: 5200,
-    imagen: imgFarenheit,
-    disponible: false
-  },
-  {
-    id: 4,
-    titulo: 'React para Principiantes',
-    autor: 'John Doe',
-    precio: 3600,
-    imagen: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=400',
-    disponible: true
+function Libros({ libros = [] }: LibrosProps) {
+console.log('catalogo', libros);
+  if (libros.length === 0) {
+    return <p>No hay libros para mostrar.</p>;
   }
-];
 
-function Libros() {
   return (
     <section className="libros">
       <div className="container">
