@@ -46,8 +46,8 @@ const librosIniciales: LibroCardProps[] = [
 
 function App() {
   const [libros, setLibros] = useState<LibroCardProps[]>(librosIniciales);
-  console.log("INICIAL:", librosIniciales);
   const agregarLibro = (nuevo: LibroCardProps) => setLibros([...libros, nuevo]);
+  
   return (
     <Layout>
       <Routes>
