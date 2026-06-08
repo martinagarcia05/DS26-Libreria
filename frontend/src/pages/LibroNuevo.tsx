@@ -75,7 +75,7 @@ function LibroNuevo({ onAgregar }: Props) {
         <Form.Label>Precio</Form.Label>
         <Form.Control
           type="number"
-          {...register('precio')}
+          {...register('precio', { valueAsNumber: true })}
           isInvalid={!!errors.precio}
         />
         <Form.Control.Feedback type="invalid">

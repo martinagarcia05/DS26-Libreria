@@ -15,7 +15,7 @@ function Header() {
           <Nav className="ms-auto align-items-lg-center gap-2">
             <Nav.Link as={NavLink} to="/" end>Inicio</Nav.Link>
             <Nav.Link as={NavLink} to="/catalogo">Catálogo</Nav.Link>
-            <Nav.Link as={NavLink} to="/contacto">Nosotros</Nav.Link>
+            <Nav.Link as={NavLink} to="/contacto">Contacto</Nav.Link>
             <button className="btn-login ms-lg-3 mt-2 mt-lg-0">Ingresar</button>
           </Nav>
         </Navbar.Collapse>
