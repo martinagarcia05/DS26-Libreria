@@ -1,39 +1,50 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { libroSchema, type LibroValidado } from '../schemas/libroSchema';
 import type { LibroCardProps } from '../types/libroCardProps';
 
-const IMG_PLACEHOLDER = 'https://placehold.co/300x400?text=Libro';
-
 interface Props {
-  onAgregar: (libro: LibroCardProps) => void;
+  onEditar: (id: number, libro: LibroCardProps) => void;
+  libros: LibroCardProps[];
 }
 
-function LibroNuevo({ onAgregar }: Props) {
+function LibroEditar({ onEditar, libros }: Props) {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
+  const libroExistente = libros.find(l => l.id === Number(id));
+
+  if (!libroExistente) {
+    navigate('/catalogo');
+    return null;
+  }
+
   const { register, handleSubmit, formState: { errors } } = useForm<LibroValidado>({
-    resolver: zodResolver(libroSchema)
+    resolver: zodResolver(libroSchema),
+    defaultValues: {
+      titulo: libroExistente.titulo,
+      autor: libroExistente.autor,
+      precio: libroExistente.precio,
+      disponible: libroExistente.disponible,
+    }
   });
 
   const onSubmit = (data: LibroValidado) => {
-    onAgregar({
-      id: Date.now(),
+    onEditar(libroExistente.id, { // inmutabilidad: referencia no valor
+      ...libroExistente,
       titulo: data.titulo,
       autor: data.autor,
       precio: data.precio,
-      imagen: IMG_PLACEHOLDER,
       disponible: data.disponible,
     });
-    
     navigate('/catalogo');
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} className="container py-4" style={{ maxWidth: 480 }}>
-      <h2>Nuevo libro</h2>
+      <h2>Editar libro</h2>
 
       <Form.Group className="mb-3">
         <Form.Label>Título</Form.Label>
@@ -75,9 +86,12 @@ function LibroNuevo({ onAgregar }: Props) {
         {...register('disponible')}
       />
 
-      <Button type="submit">Agregar libro</Button>
+      <div className="d-flex gap-2">
+        <Button type="submit">Guardar cambios</Button>
+        <Button variant="secondary" onClick={() => navigate('/catalogo')}>Cancelar</Button>
+      </div>
     </Form>
   );
 }
 
-export default LibroNuevo;
+export default LibroEditar;

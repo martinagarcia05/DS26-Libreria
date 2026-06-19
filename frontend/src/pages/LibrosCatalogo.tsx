@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 interface LibrosProps {
   libros: LibroCardProps[];
+  onEliminar: (id: number) => void;
 }
 
-function Libros({ libros = [] }: LibrosProps) {
+function Libros({ libros = [], onEliminar }: LibrosProps) {
   const navigate = useNavigate();
   console.log('catalogo', libros);
   if (libros.length === 0) {
@@ -34,6 +35,7 @@ function Libros({ libros = [] }: LibrosProps) {
               precio={libro.precio}
               imagen={libro.imagen}
               disponible={libro.disponible}
+              onEliminar={onEliminar}
             />
           ))}
         </div>

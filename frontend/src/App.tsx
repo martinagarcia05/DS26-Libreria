@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import type { LibroCardProps } from './types/libroCardProps';
 import { useState } from 'react';
 import LibroNuevo from './pages/LibroNuevo';
+import LibroEditar from './pages/LibroEditar';
 import imgPrincipito from './assets/principito.jpg';
 import imgFarenheit from './assets/farenheit.jpg';
 import imgPatrones from './assets/patronesDeDisenio.png';
@@ -47,13 +48,22 @@ const librosIniciales: LibroCardProps[] = [
 function App() {
   const [libros, setLibros] = useState<LibroCardProps[]>(librosIniciales);
   const agregarLibro = (nuevo: LibroCardProps) => setLibros([...libros, nuevo]);
+  const eliminarLibro = (id: number) => setLibros(libros.filter(l => l.id !== id)); 
+  const editarLibro = (id: number, actualizado: LibroCardProps) => setLibros(libros.map(l => l.id === id ? actualizado : l));  
   
   return (
     <Layout>
       <Routes>
         <Route path="/"            element={<Home />} />
-        <Route path="/catalogo" element={<Libros libros={libros} />} />
-        <Route path="/libros/nuevo" element={<LibroNuevo onAgregar={agregarLibro} />} />
+        <Route path="/libros/nuevo" 
+          element={<LibroNuevo onAgregar={agregarLibro} />} //cuando se ejecute onAgregar en LibroNuevo -> agregarLibro en App
+        />
+        <Route path="/libros/editar/:id" 
+          element={<LibroEditar onEditar={editarLibro} libros={libros} />} //cuando se ejecute onEditar en LibroEditar -> editarLibro en App
+        />
+        <Route path="/catalogo" 
+          element={<Libros libros={libros} onEliminar={eliminarLibro} />} //cuando se ejecute onEliminar en Libros -> eliminarLibro en App
+        />
       </Routes>
     </Layout>
 
