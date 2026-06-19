@@ -95,15 +95,30 @@ function LibroNuevo() {
 ### En App.tsx:
 
 `onAgregar` es un callback (una función que se pasa como prop) para que el componente hijo (LibroNuevo) pueda comunicarse hacia arriba con el padre (App).
+
 El flujo es:
-1. App.tsx tiene el estado libros y define agregarLibro:
+1. App.tsx tiene el estado libros y define agregarLibro, eliminarLibro y agregarLibro:
 ```tsx
   const [libros, setLibros] = useState<LibroCardProps[]>(librosIniciales);
   const agregarLibro = (nuevo: LibroCardProps) => setLibros([...libros, nuevo]);
+  const eliminarLibro = (id: number) => setLibros(libros.filter(l => l.id !== id)); 
+  const editarLibro = (id: number, actualizado: LibroCardProps) => setLibros(libros.map(l => l.id === id ? actualizado : l));  
 ```
 2. App.tsx le pasa esa función como prop onAgregar a LibroNuevo:
 ```tsx
   <LibroNuevo onAgregar={agregarLibro} />
+```
+quedaría:
+```tsx
+<Route path="/libros/nuevo" 
+  element={<LibroNuevo onAgregar={agregarLibro} />} //cuando se ejecute onAgregar en LibroNuevo -> agregarLibro en App
+/>
+<Route path="/libros/editar/:id" 
+  element={<LibroEditar onEditar={editarLibro} libros={libros} />} //cuando se ejecute onEditar en LibroEditar -> editarLibro en App
+/>
+<Route path="/catalogo" 
+  element={<Libros libros={libros} onEliminar={eliminarLibro} />} //cuando se ejecute onEliminar en Libros -> eliminarLibro en App
+/>
 ```
 3. LibroNuevo (el formulario) no tiene acceso directo al estado libros. Cuando el usuario completa el formulario y hace submit, llama a onAgregar(...) con los datos del nuevo libro:
 
@@ -117,3 +132,5 @@ const onSubmit = (data: LibroValidado) => {
 4. Eso ejecuta agregarLibro en App, que actualiza el estado con setLibros([...libros, nuevo]).
 
 ¿Por qué es necesario? Porque en React los datos fluyen unidireccionalmente (de padre a hijo via props). Si LibroNuevo modificara el estado directamente, rompería ese flujo. onAgregar es el mecanismo para que el hijo "avise" al padre: "che, tengo un libro nuevo, actualizá el estado".
+
+*componente ejecuta funcion onAlgo definida -> en app se llama a la funcion definida entre {} en el router: <Route path="/rutaComponente" element={< Componente onAlgo={funcionApp} />} (la que en realidad realiza ese algo)*

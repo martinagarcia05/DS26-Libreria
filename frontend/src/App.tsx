@@ -56,13 +56,13 @@ function App() {
       <Routes>
         <Route path="/"            element={<Home />} />
         <Route path="/libros/nuevo" 
-          element={<LibroNuevo onAgregar={agregarLibro} />} //cuando se ejecute onAgregar en LibroNuevo -> agregarLibro en App
+          element={<LibroNuevo onAgregar={agregarLibro} />}
         />
         <Route path="/libros/editar/:id" 
-          element={<LibroEditar onEditar={editarLibro} libros={libros} />} //cuando se ejecute onEditar en LibroEditar -> editarLibro en App
+          element={<LibroEditar onEditar={editarLibro} libros={libros} />}
         />
         <Route path="/catalogo" 
-          element={<Libros libros={libros} onEliminar={eliminarLibro} />} //cuando se ejecute onEliminar en Libros -> eliminarLibro en App
+          element={<Libros libros={libros} onEliminar={eliminarLibro} />}
         />
       </Routes>
     </Layout>
