@@ -1,46 +1,40 @@
 import LibroCard from '../components/LibroCard';
 import type { LibroCardProps } from '../types/libroCardProps';
 import '../assets/styles/LibrosDestacados.css';
-import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Spinner, Alert } from 'react-bootstrap';
 
-interface LibrosProps {
-  libros: LibroCardProps[];
-  onEliminar: (id: number) => void;
-}
 
-function Libros({ libros = [], onEliminar }: LibrosProps) {
-  const navigate = useNavigate();
-  console.log('catalogo', libros);
-  if (libros.length === 0) {
-    return <p>No hay libros para mostrar.</p>;
-  }
+function Libros() {
+
+  const [libros, setLibros]   = useState<LibroCardProps[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError]     = useState<string | null>(null);
+
+  useEffect(() => {
+    const cargar = async () => {
+      try {
+        const res = await fetch('/libros.json');
+        if (!res.ok) throw new Error('Error al cargar los libros');
+        setLibros(await res.json());
+      } catch (e) {
+        setError(e instanceof Error ? e.message : 'Error desconocido');
+      } finally {
+        setLoading(false);
+      }
+    };
+    cargar();
+  });
+
+  if (loading) return <Spinner animation="border" />;
+  if (error)   return <Alert variant="danger">{error}</Alert>;
 
   return (
-    <section className="libros">
-      <div className="boton">
-        <Button variant="primary" onClick={() => navigate('/libros/nuevo')}>
-          Crear libro
-        </Button>   
-      </div>
-      <div className="container">
-        <h2 className="titulo">Nuestros libros</h2>
-        <div className="grid-libros">
-          {libros.map(libro => (
-            <LibroCard
-              key={libro.id}
-              id={libro.id}
-              titulo={libro.titulo}
-              autor={libro.autor}
-              precio={libro.precio}
-              imagen={libro.imagen}
-              disponible={libro.disponible}
-              onEliminar={onEliminar}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+    
+    <div className="grid-libros">
+      {libros.map(libro => <LibroCard key={libro.id} {...libro} />)}
+    </div>
+
   );
 }
 

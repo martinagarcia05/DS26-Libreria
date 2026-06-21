@@ -2,16 +2,10 @@ import '../assets/styles/LibroCard.css';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from 'react-router-dom';
 import type { LibroCardProps } from '../types/libroCardProps';
 
-interface Props extends LibroCardProps {
-  onEliminar: (id: number) => void;
-}
-
-function LibroCard({ id, titulo, autor, precio, imagen, disponible, onEliminar }: Props) {
+function LibroCard({ titulo, autor, precio, imagen, disponible }: LibroCardProps) {
   const [disponibilidad, setDisponibilidad] = useState<boolean>(disponible);
-  const navigate = useNavigate();
   return (
     <Card style={{ width: '18rem' }}>
       <div className="libro-img-div">
@@ -21,7 +15,7 @@ function LibroCard({ id, titulo, autor, precio, imagen, disponible, onEliminar }
       <Card.Body>
         <Card.Title>{titulo}</Card.Title>
         <Card.Text>
-          <p className="autor">{autor}</p>
+          <div className="autor">{autor}</div>
           <span className="precio">${precio}</span>
         </Card.Text>
         <div className="d-flex gap-2">
@@ -31,22 +25,6 @@ function LibroCard({ id, titulo, autor, precio, imagen, disponible, onEliminar }
             onClick={() => setDisponibilidad(!disponibilidad)}
           >
             {disponibilidad ? 'Alquilar' : 'Devolver'}
-          </Button>
-          <Button
-            variant="outline-primary"
-            onClick={() => navigate(`/libros/editar/${id}`)}
-          >
-            Editar
-          </Button>
-          <Button
-            variant="outline-danger"
-            onClick={() => {
-              if (window.confirm('¿Estás seguro de eliminar este libro?')) {
-                onEliminar(id);
-              }
-            }}
-          >
-            Eliminar
           </Button>
         </div>
       </Card.Body>
