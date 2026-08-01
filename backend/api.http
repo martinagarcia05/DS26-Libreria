@@ -2,10 +2,10 @@
 GET http://localhost:3000/
 
 ### Listar libros
-GET http://localhost:3000/libros
+GET http://localhost:3000/api/libros
 
 ### Autores
-GET http://localhost:3000/autores
+GET http://localhost:3000/api/autores/1
 
 ### Libros disponibles
-GET http://localhost:3000/libros?disponible=true
+GET http://localhost:3000/api/libros?disponible=true
