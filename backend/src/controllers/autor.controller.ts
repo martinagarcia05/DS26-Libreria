@@ -10,3 +10,8 @@ export function getById(req: Request, res: Response) {
     if (!autor) return res.status(404).json({ error: "Autor no encontrado" });
     return res.json(autor);
 }
+
+export function create(req: Request, res: Response) {
+    const nuevo = autoresService.create(req.body);
+    return res.status(200).json(nuevo);
+}

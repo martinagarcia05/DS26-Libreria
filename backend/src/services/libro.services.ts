@@ -97,3 +97,9 @@ export function findAll(disponible?: boolean): Libro[] {
 export function findById(id: number): Libro | undefined {
   return libros.find(libro => libro.id === id);
 }
+// Omit<Libro, "id"> = un Libro sin el id. El id lo pone el servidor, no el cliente.
+export function create(datos: Omit<Libro, "id">): Libro {
+  const nuevo: Libro = { id: proximoId++, ...datos };
+  libros.push(nuevo);
+  return nuevo;
+}

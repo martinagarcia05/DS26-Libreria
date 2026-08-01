@@ -16,3 +16,8 @@ export function getById(req: Request, res: Response) {
   if (!libro) return res.status(404).json({ error: "Libro no encontrado" });
   return res.json(libro);
 }
+
+export function create(req: Request, res: Response) {
+  const nuevo = libroService.create(req.body);
+  return res.status(200).json(nuevo);
+}

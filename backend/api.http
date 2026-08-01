@@ -1,11 +1,25 @@
+@baseUrl = http://localhost:3000
 ### Hello
-GET http://localhost:3000/
+GET {{baseUrl}}/
 
 ### Listar libros
-GET http://localhost:3000/api/libros
+GET {{baseUrl}}/api/libros
 
 ### Autores
-GET http://localhost:3000/api/autores/1
+GET {{baseUrl}}/api/autores/1
 
 ### Libros disponibles
-GET http://localhost:3000/api/libros?disponible=true
+GET {{baseUrl}}/api/libros?disponible=true
+
+### Crear un libro
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Rayuela",
+  "autor": "Julio Cortázar",
+  "precio": 7000,
+  "imagen": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80",
+  "disponible": true
+}
+
