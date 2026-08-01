@@ -21,3 +21,15 @@ export function create(req: Request, res: Response) {
   const nuevo = libroService.create(req.body);
   return res.status(200).json(nuevo);
 }
+
+export function update(req: Request, res: Response) {
+  const actualizado = libroService.update(Number(req.params.id), req.body);
+  if (!actualizado) return res.status(404).json({ error: "Libro no encontrado" });
+  return res.json(actualizado);
+}
+
+export function remove(req: Request, res: Response) {
+  const borrado = libroService.remove(Number(req.params.id));
+  if (!borrado) return res.status(404).json({ error: "Libro no encontrado" });
+  return res.status(204).send(); // 204 = sin body. No lleva .json()
+}

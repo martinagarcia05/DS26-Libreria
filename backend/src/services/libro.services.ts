@@ -103,3 +103,17 @@ export function create(datos: Omit<Libro, "id">): Libro {
   libros.push(nuevo);
   return nuevo;
 }
+
+export function update(id: number, datos: Omit<Libro, "id">): Libro | undefined {
+  const i = libros.findIndex(libro => libro.id === id);
+  if (i === -1) return undefined;
+  libros[i] = { id, ...datos };
+  return libros[i];
+}
+
+export function remove(id: number): boolean {
+  const i = libros.findIndex(libro => libro.id === id);
+  if (i === -1) return false;
+  libros.splice(i, 1);
+  return true;
+}
