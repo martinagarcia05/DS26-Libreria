@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import * as autoresService from "../services/autor.services";
 
-export function getAll(req: Request, res: Response) {
-    return res.json(autoresService.findAll());
+export async function getAll(req: Request, res: Response) {
+    return res.json(await autoresService.findAll());
 }
 
 export async function getById(req: Request, res: Response) {

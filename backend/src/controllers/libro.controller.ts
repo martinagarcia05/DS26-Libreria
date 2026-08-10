@@ -4,11 +4,11 @@ import * as libroService from "../services/libro.services";
 // El controller traduce HTTP <-> dominio y elige el status code.
 // No busca ni guarda datos: eso es del service.
 
-export function getAll(req: Request, res: Response) {
+export async function getAll(req: Request, res: Response) {
   // req.query siempre trae strings. La traducción a boolean es trabajo de esta capa.
   const { disponible } = req.query;
   const filtro = disponible === undefined ? undefined : disponible === "true";
-  return res.json(libroService.findAll(filtro));
+  return res.json(await libroService.findAll(filtro));
 }
 
 export async function getById(req: Request, res: Response) {
