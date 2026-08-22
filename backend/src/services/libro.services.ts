@@ -1,12 +1,15 @@
 import { prisma } from "../config/prisma";
-import { Libro } from "../types/libro.types";
+import { Libro, Prisma } from "../generated/prisma/client";
 
-export async function findAll(disponible?: boolean): Promise<Libro[]> {
-  return prisma.libro.findMany({ where: { disponible } });
+export type LibroConAutor = Prisma.LibroGetPayload<{ include: { autor: true } }>;
+export type LibroDetalle = Prisma.LibroGetPayload<{ include: { autor: true; categorias: true } }>;
+
+export async function findAll(disponible?: boolean): Promise<LibroConAutor[]> {
+  return prisma.libro.findMany({ where: { disponible }, include: { autor: true } });
 }
 
-export async function findById(id: number): Promise<Libro | null> {
-  return prisma.libro.findUnique({ where: { id } });
+export async function findById(id: number): Promise<LibroDetalle | null> {
+  return prisma.libro.findUnique({ where: { id }, include: { autor: true, categorias: true } });
 }
 
 export async function create(datos: Omit<Libro, "id">): Promise<Libro> {

@@ -1,13 +1,16 @@
 import { prisma } from "../config/prisma";
-import { Autor } from "../types/autor.types";
+import { Autor, Prisma } from "../generated/prisma/client";
 
-export async function findAll(): Promise<Autor[]> {
-  return prisma.autor.findMany();
+export type AutorConLibros = Prisma.AutorGetPayload<{ include: { libros: true } }>;
+
+export async function findAll(): Promise<AutorConLibros[]> {
+  return prisma.autor.findMany({ include: { libros: true } });
 }
 
-export async function findById(id: number): Promise<Autor | null> {
+export async function findById(id: number): Promise<AutorConLibros | null> {
   return prisma.autor.findUnique({
-    where: { id }
+    where: { id },
+    include: { libros: true }
   });
 }
 
