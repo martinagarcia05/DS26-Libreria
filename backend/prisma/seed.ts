@@ -2,7 +2,6 @@ import { prisma } from "../src/config/prisma";
 
 const libros = [
   {
-    "id": 10,
     "titulo": "El principito",
     "autor": "Antoine de Saint-Exupéry",
     "precio": 4500,
@@ -10,7 +9,6 @@ const libros = [
     "disponible": true
   },
   {
-    "id": 20,
     "titulo": "Patrones de diseño",
     "autor": "Alexander Shvets",
     "precio": 8500,
@@ -18,7 +16,6 @@ const libros = [
     "disponible": true
   },
   {
-    "id": 30,
     "titulo": "Farenheit 451",
     "autor": "Ray Bradbury",
     "precio": 5200,
@@ -26,7 +23,6 @@ const libros = [
     "disponible": false
   },
   {
-    "id": 40,
     "titulo": "Cien años de soledad",
     "autor": "Gabriel García Márquez",
     "precio": 6200,
@@ -34,7 +30,6 @@ const libros = [
     "disponible": true
   },
   {
-    "id": 50,
     "titulo": "1984",
     "autor": "George Orwell",
     "precio": 5400,
@@ -42,7 +37,6 @@ const libros = [
     "disponible": true
   },
   {
-    "id": 60,
     "titulo": "El alquimista",
     "autor": "Paulo Coelho",
     "precio": 4300,
@@ -50,7 +44,6 @@ const libros = [
     "disponible": true
   },
   {
-    "id": 70,
     "titulo": "Sapiens: De animales a dioses",
     "autor": "Yuval Noah Harari",
     "precio": 7800,
@@ -58,7 +51,6 @@ const libros = [
     "disponible": false
   },
   {
-    "id": 80,
     "titulo": "El código Da Vinci",
     "autor": "Dan Brown",
     "precio": 5100,
@@ -66,7 +58,6 @@ const libros = [
     "disponible": true
   },
   {
-    "id": 90,
     "titulo": "Matar a un ruiseñor",
     "autor": "Harper Lee",
     "precio": 4700,
@@ -74,7 +65,6 @@ const libros = [
     "disponible": true
   },
   {
-    "id": 100,
     "titulo": "La sombra del viento",
     "autor": "Carlos Ruiz Zafón",
     "precio": 6900,
