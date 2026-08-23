@@ -58,3 +58,16 @@ DELETE {{baseUrl}}/api/libros/30
 
 ### Borrar un autor
 DELETE {{baseUrl}}/api/autores/1
+
+### errores a propósito
+### 400 — sin título
+POST {{baseUrl}}/api/libros
+{ "precio": 5000, "imagen": "https://…", "autorId": 1 }
+### 400 — el autor no existe (formato válido, dato imposible)
+POST {{baseUrl}}/api/libros
+{ "titulo": "Huérfano", "precio": 5000, "imagen": "https://…", "autorId": 9999 }
+### 409 — autor duplicado
+POST {{baseUrl}}/api/autores
+{ "nombre": "Gabriel García Márquez", "nacionalidad": "Colombia" }
+### 409 — borrar un autor con libros (onDelete: Restrict)
+DELETE {{baseUrl}}/api/autores/1
