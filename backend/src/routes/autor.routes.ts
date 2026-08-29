@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as autorController from "../controllers/autor.controller";
-import { validate, validateParams } from "../middlewares/validiate.middleware";
+import { validate, validateParams } from "../middlewares/validate.middleware";
 import { idParamSchema } from "../validations/autor.validation";
 import { autorCreateSchema, autorUpdateSchema } from "../validations/autor.validation";
 

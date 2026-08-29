@@ -16,7 +16,7 @@ model Libro {
   precio     Int
   imagen     String
   disponible Boolean @default(true)
-  categorias Categoría[]
+  categorias Categoria[]
 }
 
 model Autor {
@@ -26,7 +26,7 @@ model Autor {
   libros       Libro[]
 }
 
-model Categoría {
+model Categoria {
   id   Int    @id @default(autoincrement())
   nombre String @unique
   libros Libro[]
