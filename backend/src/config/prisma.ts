@@ -7,5 +7,5 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 // Una sola instancia para toda la app: abre un pool de conexiones y lo reusa.
 export const prisma = new PrismaClient({ 
     adapter,
-    omit: { usuario: { passwordHash: true } },   // ← seguro por defecto
+    // omit: { usuario: { passwordHash: true } },   // ← seguro por defecto
  });

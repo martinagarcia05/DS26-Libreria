@@ -25,7 +25,7 @@ export async function findById(id: number): Promise<UsuarioPublico | null> {
 export async function login(datos: Login): Promise<{ token: string; usuario: UsuarioPublico } | null> {
   const usuario = await prisma.usuario.findUnique({
     where: { email: datos.email },
-    omit:  { passwordHash: false },        // ← el omit global lo esconde: acá SÍ lo necesito
+    // omit:  { passwordHash: false },        // ← el omit global lo esconde: acá SÍ lo necesito
   });
   if (!usuario) return null;
 

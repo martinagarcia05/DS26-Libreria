@@ -112,21 +112,20 @@ async function main() {
   await prisma.autor.createMany({ data: autores, skipDuplicates: true });
   await prisma.categoria.createMany({ data: categorias, skipDuplicates: true });
   for (const { autor, cats, ...datos } of libros) {
-    const existe = await prisma.libro.findFirst({ where: { titulo: datos.titulo } 
-  });
-  if (existe) continue;
-  await prisma.libro.create({ data: {
+    const existe = await prisma.libro.findFirst({ where: { titulo: datos.titulo } });
+    if (existe) continue;
+    await prisma.libro.create({ data: {
       ...datos,
-      autor:      { connect: { nombre: autor } },        
+      autor:      { connect: { nombre: autor } },
       categorias: { connect: cats.map(nombre => ({ nombre })) },
-  } });
+    } });
+  }
   for (const { password, ...datos } of usuarios) {
     await prisma.usuario.upsert({
       where:  { email: datos.email },
       update: {},
       create: { ...datos, passwordHash: await bcrypt.hash(password, 10) },
     });
-  }
   }
 }
 
