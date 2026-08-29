@@ -13,7 +13,7 @@ export async function getById(req: Request, res: Response) {
 
 export async function create(req: Request, res: Response) {
         const nuevo = await autoresService.create(req.body);
-        return res.status(200).json(nuevo);
+        return res.status(201).json(nuevo);
 }
 
 export async function update(req: Request, res: Response) {
