@@ -3,9 +3,8 @@ import jwt from "jsonwebtoken";
 import { prisma } from "../config/prisma";
 import { JWT_SECRET, JWT_EXPIRES_IN, SALT_ROUNDS } from "../config/env";
 import type { Registro, Login } from "../validations/auth.validation";
+import type { PayloadToken, UsuarioPublico } from "../types/usuarios.types";
 
-export type PayloadToken   = { id: number; rol: "ADMIN" | "CLIENTE" };
-export type UsuarioPublico = { id: number; email: string; nombre: string; rol: "ADMIN" | "CLIENTE" };
 
 export async function registrar(datos: Registro): Promise<UsuarioPublico> {
   const hash = await bcrypt.hash(datos.password, SALT_ROUNDS);
@@ -25,7 +24,7 @@ export async function findById(id: number): Promise<UsuarioPublico | null> {
 export async function login(datos: Login): Promise<{ token: string; usuario: UsuarioPublico } | null> {
   const usuario = await prisma.usuario.findUnique({
     where: { email: datos.email },
-    // omit:  { passwordHash: false },        // ← el omit global lo esconde: acá SÍ lo necesito
+    omit:  { passwordHash: false },        // ← el omit global lo esconde: acá SÍ lo necesito
   });
   if (!usuario) return null;
 
