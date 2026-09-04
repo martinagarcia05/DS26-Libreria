@@ -1,0 +1,19 @@
+const BASE = import.meta.env.VITE_API_URL;
+
+export async function apiFetch<T>(ruta: string, opciones: RequestInit = {}): Promise<T> {
+  // Acá va la lógica del token que vas a agregar después...
+  
+  const res = await fetch(`${BASE}${ruta}`, {
+    ...opciones,
+    headers: {
+      'Content-Type': 'application/json',
+      ...opciones.headers,
+    },
+  });
+
+  const cuerpo = await res.json().catch(() => null);
+    if (!res.ok) throw new Error(cuerpo?.error ?? `Error ${res.status}`);
+
+  
+  return cuerpo as T;
+}
