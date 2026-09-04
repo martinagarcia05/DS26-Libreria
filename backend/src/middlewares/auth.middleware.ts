@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/env";
-import type { PayloadToken } from "../services/auth.services";
+import type { PayloadToken } from "../types/usuarios.types";
 
 // ¿Quién sos? → 401 si no lo puedo saber
 export function authenticate(req: Request, res: Response, next: NextFunction) {
