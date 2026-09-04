@@ -15,7 +15,7 @@ function LibroCard({ titulo, autor, precio, imagen, disponible }: LibroCardProps
       <Card.Body>
         <Card.Title>{titulo}</Card.Title>
         <Card.Text>
-          <div className="autor">{autor}</div>
+          <div className="autor">{autor.nombre}</div>
           <span className="precio">${precio}</span>
         </Card.Text>
         <div className="d-flex gap-2">
