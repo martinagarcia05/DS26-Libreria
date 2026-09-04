@@ -3,6 +3,7 @@ import { Navbar, Nav, Container, Form, InputGroup, Button } from 'react-bootstra
 import type { FormEvent } from 'react';                      // <-- NUEVO
 import { useBusqueda } from '../../context/BusquedaContext'; // <-- NUEVO
 import '../../assets/styles/Header.css';
+import logo from '../../assets/libroIcono.png';
 
 function Header() {
   const { filtro, setFiltro } = useBusqueda(); // <-- NUEVO
@@ -18,7 +19,7 @@ function Header() {
     <Navbar expand="lg" className="custom-header">
       <Container>
         <Navbar.Brand href="/" className="d-flex align-items-center gap-2">
-          <img src="/src/assets/libroIcono.png" alt="Logo" width="32" height="32" />
+          <img src={logo} alt="Logo" width="32" height="32" />
           <span className="fw-bold brand-text">Librería UTN</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar" />
@@ -26,7 +27,6 @@ function Header() {
           <Nav className="ms-auto align-items-lg-center gap-2">
             <Nav.Link as={NavLink} to="/" end>Inicio</Nav.Link>
             <Nav.Link as={NavLink} to="/catalogo">Catálogo</Nav.Link>
-            <Nav.Link as={NavLink} to="/contacto">Contacto</Nav.Link>
 
             {/* barra de búsqueda: input + lupa pegados con InputGroup */}
             <Form onSubmit={buscar} className="ms-lg-3" style={{ maxWidth: '18rem' }}>
