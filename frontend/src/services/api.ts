@@ -14,9 +14,8 @@ export async function apiFetch<T>(ruta: string, opciones: RequestInit = {}): Pro
     },
   });
 
-  const cuerpo = await res.json().catch(() => null);
-    if (!res.ok) throw new Error(cuerpo?.error ?? `Error ${res.status}`);
+  const cuerpo = await res.json().catch(() => null);   // el 404 de ruta viene en HTML
+  if (!res.ok) throw new Error(cuerpo?.error ?? `Error ${res.status}`);
 
-  
   return cuerpo as T;
 }

@@ -12,7 +12,7 @@ export async function findById(id: number): Promise<LibroDetalle | null> {
   return prisma.libro.findUnique({ where: { id }, include: { autor: true, categorias: true } });
 }
 
-export async function create(datos: Omit<Libro, "id">): Promise<Libro> {
+export async function create(datos: Omit<Libro, "id">): Promise<LibroConAutor> {
   return prisma.libro.create({ data: datos, include: { autor: true } });
 }
 

@@ -72,7 +72,7 @@ function LibroNuevo() {
         <Form.Label>Precio</Form.Label>
         <Form.Control
           type="number"
-          {...register('precio', { valueAsNumber: true })}
+          {...register('precio')}
           isInvalid={!!errors.precio}
         />
         <Form.Control.Feedback type="invalid">
