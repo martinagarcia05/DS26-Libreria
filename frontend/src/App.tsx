@@ -1,17 +1,21 @@
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
 import Libros from './pages/LibrosCatalogo';
+import Login from './pages/Login';
+import LibroNuevo from './pages/LibroNuevo';
 import { Routes, Route } from 'react-router-dom';
-import { BusquedaProvider } from './context/BusquedaContext'; // <-- NUEVO
+import { BusquedaProvider } from './context/BusquedaContext'; 
 
 function App() {
   
   return (
-    <BusquedaProvider>    {/* <-- NUEVO: todo lo de adentro puede leer el filtro */}
+    <BusquedaProvider>    
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/catalogo" element={<Libros />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/libros/nuevo" element={<LibroNuevo />} />
         </Routes>
       </Layout>
     </BusquedaProvider>

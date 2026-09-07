@@ -16,11 +16,11 @@ export async function create(datos: Omit<Libro, "id">): Promise<Libro> {
   return prisma.libro.create({ data: datos, include: { autor: true } });
 }
 
-export async function update(id: number, datos: Omit<Libro, "id">): Promise<Libro | null> {
+export async function update(id: number, datos: Omit<Libro, "id">): Promise<LibroConAutor | null> {
   const existe = await prisma.libro.findUnique({ where: { id } });
   if (!existe) return null;
   await prisma.libro.update({ where: { id }, data: datos });
-  return prisma.libro.findUnique({ where: { id } });
+  return prisma.libro.findUnique({ where: { id }, include: { autor: true } });
 }
 
 export async function remove(id: number): Promise<boolean> {

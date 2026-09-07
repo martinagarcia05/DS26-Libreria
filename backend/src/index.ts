@@ -9,7 +9,6 @@ const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
 const corsOptions = { origin: [process.env.FRONTEND_URL ?? "http://localhost:5173"] };
-app.use(cors(corsOptions)); 
 
 app.use(cors(corsOptions));
 app.use(express.json());
