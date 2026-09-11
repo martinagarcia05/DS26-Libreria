@@ -5,12 +5,12 @@ import { useBusqueda } from '../../context/BusquedaContext';
 import { obtenerToken, borrarToken } from '../../services/sesion';
 import '../../assets/styles/Header.css';
 import logo from '../../assets/libroIcono.png';
-
+import { useAuth } from '../../context/AuthContext';
 function Header() {
   const { filtro, setFiltro } = useBusqueda(); 
   const navigate = useNavigate();              
+  const { tieneRol } = useAuth();
 
-  
   const buscar = (e: FormEvent) => {
     e.preventDefault();
     navigate('/catalogo');
@@ -38,6 +38,8 @@ function Header() {
           <Nav className="ms-auto align-items-lg-center gap-2">
             <Nav.Link as={NavLink} to="/" end>Inicio</Nav.Link>
             <Nav.Link as={NavLink} to="/catalogo">Catálogo</Nav.Link>
+            
+            {tieneRol('ADMIN') && <Nav.Link as={NavLink} to="/libros/nuevo">Nuevo libro</Nav.Link>}
 
             {/* barra de búsqueda: input + lupa pegados con InputGroup */}
             <Form onSubmit={buscar} className="ms-lg-3" style={{ maxWidth: '18rem' }}>
