@@ -46,10 +46,16 @@ export function AuthProvider({ children }: { children: ReactNode }){
 
         // 2. Guarda el token en localStorage con guardarToken (sesion.ts:2).
         guardarToken(data.token);
-        
+
         // 3. Setea el usuario en el estado del Provider, lo que dispara estaAutenticado y tieneRol. 
         setUsuario(data.usuario);
     };
+
+    // // checkea sesión expirada
+    useEffect(() => {
+        window.addEventListener('sesion-expirada', logout);
+        return () => window.removeEventListener('sesion-expirada', logout);
+    }, []);
 
 
   return (
