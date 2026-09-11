@@ -5,10 +5,12 @@ import Login from './pages/Login';
 import LibroNuevo from './pages/LibroNuevo';
 import { Routes, Route } from 'react-router-dom';
 import { BusquedaProvider } from './context/BusquedaContext'; 
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   
   return (
+    <AuthProvider>
     <BusquedaProvider>    
       <Layout>
         <Routes>
@@ -19,6 +21,7 @@ function App() {
         </Routes>
       </Layout>
     </BusquedaProvider>
+    </AuthProvider>
   );
 }
 

@@ -1,9 +1,19 @@
 export interface Sesion {
   token: string;
   usuario: {
-    id: number;
-    email: string;
-    nombre: string;
-    rol: 'ADMIN' | 'CLIENTE';
+    usuario: Usuario;
   };
 }
+
+export interface Usuario {
+  id: number;
+  credenciales: Credenciales;
+  rol: Rol;
+}
+
+export interface Credenciales {
+  email: string;
+  nombre: string;
+}
+
+export type Rol = 'ADMIN' | 'CLIENTE';
