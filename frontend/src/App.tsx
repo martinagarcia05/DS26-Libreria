@@ -6,6 +6,7 @@ import LibroNuevo from './pages/LibroNuevo';
 import { Routes, Route } from 'react-router-dom';
 import { BusquedaProvider } from './context/BusquedaContext'; 
 import { AuthProvider } from './context/AuthContext';
+import { PrivateRoute } from './components/PrivateRoute';
 
 function App() {
   
@@ -14,6 +15,7 @@ function App() {
     <BusquedaProvider>    
       <Layout>
         <Routes>
+          <Route element={<PrivateRoute rol="ADMIN" />}></Route>
           <Route path="/" element={<Home />} />
           <Route path="/catalogo" element={<Libros />} />
           <Route path="/login" element={<Login />} />

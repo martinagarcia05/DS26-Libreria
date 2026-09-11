@@ -1,13 +1,12 @@
 export interface Sesion {
   token: string;
-  usuario: {
-    usuario: Usuario;
-  };
+  usuario: Usuario;
 }
 
 export interface Usuario {
   id: number;
-  credenciales: Credenciales;
+  email: string;
+  nombre: string;
   rol: Rol;
 }
 

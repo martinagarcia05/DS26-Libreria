@@ -21,9 +21,6 @@ export function AuthProvider({ children }: { children: ReactNode }){
     const [usuario, setUsuario] = useState<Usuario | null>(null);
     const [cargando, setCargando] = useState(obtenerToken() !== null);
 
-    // const estaAutenticado = usuario !== null;
-    // const tieneRol = (rol: Rol) => usuario?.rol === rol;
-
     useEffect(() => {
     if (!obtenerToken()) return;    // sin token no hay nada que averiguar
     apiFetch<Usuario>('/auth/yo')
@@ -32,32 +29,41 @@ export function AuthProvider({ children }: { children: ReactNode }){
         .finally(() => setCargando(false));
     }, []);
 
-//     const logout = () => {
-//         borrarToken();
-//         setUsuario(null);
-//     };
+    const logout = () => {
+        borrarToken();
+        setUsuario(null);
+    };
 
-//     const login = async (credenciales: Credenciales) => {
-//         // Ajustá la ruta o el tipo de retorno según cómo sea exactamente tu backend.
-//         // La idea es que la página Login ya no manipule el token, lo hace el Provider.
-//         const data = await apiFetch<{ token: string; usuario: Usuario }>('/auth/login', {
-//         method: 'POST',
-//         body: JSON.stringify(credenciales)
-//         });
-//         guardarToken(data.token); 
-//         setUsuario(data.usuario);
-//     };
+    const login = async (credenciales: Credenciales) => {
+        
+        // Login ya no toca el token ni el usuario, solo delega al Provider y navega a /catalogo
+        
+        //1. Hace POST /auth/login con las credenciales vía apiFetch.
+        const data = await apiFetch<{ token: string; usuario: Usuario }>('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(credenciales)
+        });
 
-//     // Escuchador de sesión expirada (Paso 5 de la clase)
-//   useEffect(() => {
-//     window.addEventListener('sesion-expirada', logout);
-//     return () => window.removeEventListener('sesion-expirada', logout);
-//   }, []);
+        // 2. Guarda el token en localStorage con guardarToken (sesion.ts:2).
+        guardarToken(data.token);
+        
+        // 3. Setea el usuario en el estado del Provider, lo que dispara estaAutenticado y tieneRol. 
+        setUsuario(data.usuario);
+    };
+
 
   return (
-    
+    <AuthContext.Provider value={{ 
+        usuario, 
+        cargando, 
+        estaAutenticado: usuario !== null, 
+        tieneRol: (rol: Rol) => usuario?.rol === rol, 
+        login, 
+        logout }}>
+
       {children}
-    
+
+    </AuthContext.Provider>
   );
 
 }
