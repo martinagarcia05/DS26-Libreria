@@ -13,7 +13,7 @@ export interface Usuario {
 
 export interface Credenciales {
   email: string;
-  nombre: string;
+  password: string;
 }
 
 export type Rol = 'ADMIN' | 'CLIENTE';
