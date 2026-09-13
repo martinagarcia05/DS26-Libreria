@@ -2,7 +2,7 @@ import { obtenerToken } from './sesion';
 
 const BASE = import.meta.env.VITE_API_URL;
 
-class ApiError extends Error { 
+export class ApiError extends Error { 
   status: number;
   
   constructor(status: number, message: string) {

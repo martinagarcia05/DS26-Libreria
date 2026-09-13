@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import { BusquedaProvider } from './context/BusquedaContext'; 
 import { AuthProvider } from './context/AuthContext';
 import { PrivateRoute } from './components/PrivateRoute';
+import { SinPermiso } from './pages/SinPermiso';
 
 function App() {
   
@@ -15,11 +16,16 @@ function App() {
     <BusquedaProvider>    
       <Layout>
         <Routes>
-          <Route element={<PrivateRoute rol="ADMIN" />}></Route>
+          {/* públicas */}
           <Route path="/" element={<Home />} />
           <Route path="/catalogo" element={<Libros />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/libros/nuevo" element={<LibroNuevo />} />
+          <Route path="/sin-permiso" element={<SinPermiso />} />
+
+          {/* solo ADMIN: PrivateRoute decide, LibroNuevo se renderiza en su <Outlet /> */}
+          <Route element={<PrivateRoute rol="ADMIN" />}>
+            <Route path="/libros/nuevo" element={<LibroNuevo />} />
+          </Route>
         </Routes>
       </Layout>
     </BusquedaProvider>

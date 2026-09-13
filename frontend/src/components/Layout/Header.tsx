@@ -2,24 +2,22 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Navbar, Nav, Container, Form, InputGroup, Button } from 'react-bootstrap';
 import type { FormEvent } from 'react';                      
 import { useBusqueda } from '../../context/BusquedaContext'; 
-import { obtenerToken, borrarToken } from '../../services/sesion';
 import '../../assets/styles/Header.css';
 import logo from '../../assets/libroIcono.png';
 import { useAuth } from '../../context/AuthContext';
 function Header() {
   const { filtro, setFiltro } = useBusqueda(); 
   const navigate = useNavigate();              
-  const { tieneRol } = useAuth();
+  const { usuario, logout, tieneRol } = useAuth();
 
   const buscar = (e: FormEvent) => {
     e.preventDefault();
     navigate('/catalogo');
   };
 
-  const estaLogueado = !!obtenerToken();
   const manejarSesion = () => {
-    if (estaLogueado) {
-      borrarToken();
+    if (usuario) {
+      logout();
       navigate('/');
     } else {
       navigate('/login');
@@ -56,8 +54,9 @@ function Header() {
               </InputGroup>
             </Form>
 
+            {usuario && <Navbar.Text className="ms-lg-3">Hola, {usuario.nombre}</Navbar.Text>}
             <button className="btn-login ms-lg-3 mt-2 mt-lg-0" onClick={manejarSesion}>
-              {estaLogueado ? 'Salir' : 'Ingresar'}
+              {usuario ? 'Salir' : 'Ingresar'}
             </button>
           </Nav>
         </Navbar.Collapse>
