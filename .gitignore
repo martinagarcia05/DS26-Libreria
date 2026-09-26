@@ -3,3 +3,4 @@ dist
 .env
 backend/src/generated/prisma
 /package-lock.json
+coverage

@@ -1,15 +1,19 @@
 import { defineConfig } from "vitest/config";
 import { loadEnv } from "vite";
 
-// lee tu .env (expande ${POSTGRES_USER} como Compose)
+// Los tests corren siempre dentro del container (docker compose exec/run):
+// "db" ya es el hostname correcto, sin traducir puertos.
 const env = loadEnv("test", process.cwd(), "");
 
 export default defineConfig({
   test: {
     env: {
       JWT_SECRET: "secreto-solo-para-tests",     // nunca el real
-      // "db" solo existe en Docker: 
-      DATABASE_URL: (env.DATABASE_URL ?? "").replace("@db:5432", "@localhost:5433"),
+      DATABASE_URL: env.DATABASE_URL ?? "",
+    },
+    coverage: {
+      // "coverage" está montado como volumen: no se puede rm -rf un punto de montaje
+      clean: false,
     },
   },
 });
