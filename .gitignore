@@ -1,6 +1,6 @@
 node_modules
 dist
 .env
-backend/src/generated/prisma
+backend/src/generated
 /package-lock.json
 coverage
